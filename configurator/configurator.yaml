@@ -1,0 +1,54 @@
+editor: "vim"
+
+configurations:
+    configurator:
+        - source: configurator.yaml
+          dest: "$HOME/.config/configurator/configurator.yaml"
+
+    sway:
+        - source: config
+          dest: "$HOME/.config/sway/config"
+
+    alacritty:
+        - source: alacritty.yml
+          dest: "$HOME/.config/alacritty/alacritty.yml"
+
+    firefox:
+        - name: userchrome
+          source: userChrome.css
+          dest: "$HOME/.mozilla/firefox/gtlao9jg.default/chrome/userChrome.css"
+
+    refind:
+        # current state: ???
+        - source: refind.conf
+          dest: "/boot/EFI/refind/refind.conf"
+          root: true
+
+    swaylock:
+        - source: config
+          dest: "$HOME/.config/swaylock/config"
+
+    waybar:
+        - name: config
+          source: config
+          dest: "$HOME/.config/waybar/config"
+
+        - name: style
+          source: style.css
+          dest: "$HOME/.config/waybar/style.css"
+
+    rofi:
+        - source: config.rasi
+          dest: "$HOME/.config/rofi/rofi/config.rasi"
+
+    bashrc:
+        - source: bashrc
+          dest: "$HOME/.bashrc"
+
+    vimrc:
+        - source: vimrc
+          dest: "$HOME/.vimrc"
+
+    mako:
+        - source: config
+          dest: "$HOME/.config/mako/config"

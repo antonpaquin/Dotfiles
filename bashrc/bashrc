@@ -1,0 +1,61 @@
+alias ls='ls --color=auto'
+alias vi='vim'
+alias gs='git status'
+
+cur() {
+	case "$1" in 
+	"here" | "h")
+		echo $(pwd) > $HOME/.run/cur;
+		;;
+	"set" | "s" )
+		echo "$2" > $HOME/.run/cur;
+		;;
+	"go" | "g" )
+		cd "$(cat $HOME/.run/cur)";
+		;;
+	"delete" | "d" )
+		rm $HOME/.run/cur;
+		;;
+	"print" | "p" )
+		echo "$(cat $HOME/.run/cur)";
+		;;
+	"env" | "e" )
+		case "$2" in 
+		"" )
+			source $(cat $HOME/.run/cur_env)
+			;;
+		"here" | "h" )
+			echo "$(pwd)/$(find . -path '*/bin/*' -name activate -printf '%P\n' | head -1)" > $HOME/.run/cur_env
+			;;
+		"delete" | "d" )
+			rm $HOME/.run/cur_env
+			;;
+		"print" | "p" )
+			echo "$(cat $HOME/.run/cur_env)"
+			;;
+		esac
+	esac
+}
+
+pathmunge () {
+        if ! echo $PATH | /usr/bin/egrep -q "(^|:)$1($|:)" ; then
+           if [ "$2" = "after" ] ; then
+              PATH=$PATH:$1
+           else
+              PATH=$1:$PATH
+           fi
+        fi
+}
+
+function _update_ps1() {
+    # Powerline is in a custom build in ~/code/powerline-rust,
+    # installed via symlink in ~/.bin
+    PS1="\n$(powerline $?)"
+}
+
+if [ "$TERM" != "linux" ]; then
+    PROMPT_COMMAND="_update_ps1; $PROMPT_COMMAND"
+fi
+
+pathmunge "/home/anton/.bin" after
+pathmunge "/home/anton/scripts" after

@@ -1,0 +1,28 @@
+@namespace url("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul");
+
+#TabsToolbar {
+    visibility: collapse;
+}
+
+#urlbar {
+    font-size: 12px !important;
+}
+
+#sidebar-box[sidebarcommand="treestyletab_piro_sakura_ne_jp-sidebar-action"] #sidebar-header {
+    display:none;
+}
+
+#sidebar-box[sidebarcommand="treestyletab_piro_sakura_ne_jp-sidebar-action"] {
+    max-width: none !important;
+    min-width: 0px !important;
+}
+
+#navigator-toolbox:not(:focus-within):not(:hover) {
+    /* Anton: for notification / prompt reasons, 
+     * this should be the exact height of the bar
+     * (or maybe -1000 to make those prompts go away entirely?)
+     * But I can't be fucked to experiment with it right now
+     * TODO
+     */
+    margin-top: -50px;
+}
